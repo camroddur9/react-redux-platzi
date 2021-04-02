@@ -8,10 +8,10 @@ interface Props{
 const Menu = (props: Props) => (
     <nav id = "menu">
         <Link to = "/">
-            Usuarios
+            Users
         </Link>
         <Link to = "/tareas">
-            Tareas
+            Task
         </Link>
     </nav>
 );

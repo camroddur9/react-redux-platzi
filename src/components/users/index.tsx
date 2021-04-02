@@ -5,6 +5,9 @@ import * as userActions from './../../actions/usersActions'
 
 import ContentComponent from './../content/Content.component'
 import SpinnerComponent from './../general/Spinner.Component'
+import FatalComponent from './../general/Fatal.Component'
+
+import icons from './../../utils/import.icons'
 
 interface Props{
   
@@ -22,34 +25,18 @@ class Users extends React.Component <Actions, Props> {
     this.props.getAll()
   }
 
-  handleShowRows = () => (
-    this.props.usuarios.map((usuario: any) => (
-      <tr key = {usuario.id}>
-        <td>
-          {usuario.name}
-        </td>
-        <td>
-          {usuario.username}
-        </td>
-        <td>
-          {usuario.email}
-        </td>
-        <td>
-          {usuario.website}
-        </td>
-      </tr>
-    ))
-  )
-
   render(){
-    console.log(this.props.loadingUsers)
+    console.log(this.props.error === "")
     return(
       <div>
         {this.props.loadingUsers ? 
-        <SpinnerComponent/>:
-        <ContentComponent
-          handleShowRows = {this.handleShowRows()}
-        />
+          <SpinnerComponent/>:
+          this.props.error === "" ?
+            <ContentComponent
+            />:
+            <FatalComponent
+              errorMessage = {this.props.error}
+            />
         }
       </div>
     )

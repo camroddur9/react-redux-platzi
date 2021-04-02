@@ -1,10 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
+
+import * as userActions from './../../actions/usersActions'
+
+import icons from './../../utils/import.icons'
 
 interface Properties {
-    handleShowRows: any
+
 }
 
-const ContentComponent = (property: Properties) => {
+const ContentComponent = (props: any) => {
+
+  
+    const handleShowRows = () => 
+      props.usuarios.map((usuario: any, key: number) => (
+        <tr key = {usuario.id}>
+          <td>
+            {usuario.name}
+          </td>
+          <td>
+            {usuario.username}
+          </td>
+          <td>
+            {usuario.email}
+          </td>
+          <td>
+            {usuario.website}
+          </td>
+          <td className = "show-btns-container">
+            <Link to = { `/publications/${key}`}>
+              <img className = "show-btn" src = {icons['show']}></img>
+            </Link>
+          </td>
+        </tr>
+      )
+    )
 
     return(
         <table className = "tabla">
@@ -26,11 +57,15 @@ const ContentComponent = (property: Properties) => {
           </thead>
           <tbody>
             {
-              property.handleShowRows
+              handleShowRows()
             }
           </tbody>
         </table>
     )
 }
 
-export default ContentComponent;
+const mapStateToProps = (reducers: any) => {
+  return( reducers.userReducer)
+};
+
+export default connect(mapStateToProps, userActions)(ContentComponent);

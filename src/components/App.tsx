@@ -4,6 +4,7 @@ import './../Styles/style.css';
 
 import Menu from './menu';
 import Users from './users/index'
+import Publications from './Publications/index'
 
 const Tareas = () => 
   <div>Tareas</div>
@@ -14,6 +15,7 @@ const App = () => (
     <div className = "margen">
       <Route exact path='/' component = {Users} />
       <Route exact path='/tareas' component = {Tareas}/>
+      <Route exact path='/publications/:key' component = {Publications}/>
     </div>
   </BrowserRouter>
 );
