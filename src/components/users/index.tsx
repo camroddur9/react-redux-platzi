@@ -1,35 +1,29 @@
 import React from 'react';
-import './../../Styles/style.css';
-import  axios from 'axios';
+import { connect } from 'react-redux';
+
+import * as userActions from './../../actions/usersActions'
+
+import ContentComponent from './../content/Content.component'
+import SpinnerComponent from './../general/Spinner.Component'
 
 interface Props{
-
+  
 }
-
-interface State{
+interface Actions{
+  getAll?: any
   usuarios?: any
+  loadingUsers?: boolean
+  error?: string
 }
 
+class Users extends React.Component <Actions, Props> {
 
-
-class Users extends React.Component<Props,State> {
-
-  constructor(props: Props){
-    super(props);
-    this.state = {
-      usuarios: []
-    }
+  componentDidMount() {
+    this.props.getAll()
   }
 
-  async componentDidMount() {
-    const resp = await axios.get('https://jsonplaceholder.typicode.com/users')
-    this.setState({
-      usuarios: resp.data
-    });
-  }
-
-  ponerFilas = () => (
-    this.state.usuarios.map((usuario: any) => (
+  handleShowRows = () => (
+    this.props.usuarios.map((usuario: any) => (
       <tr key = {usuario.id}>
         <td>
           {usuario.name}
@@ -48,34 +42,22 @@ class Users extends React.Component<Props,State> {
   )
 
   render(){
+    console.log(this.props.loadingUsers)
     return(
       <div>
-        <table className = "tabla">
-          <thead>
-            <tr>
-              <th>
-                Name
-              </th>
-              <th>
-                User
-              </th>
-              <th>
-                Email
-              </th>
-              <th>
-                Website
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.ponerFilas()
-            }
-          </tbody>
-        </table>
+        {this.props.loadingUsers ? 
+        <SpinnerComponent/>:
+        <ContentComponent
+          handleShowRows = {this.handleShowRows()}
+        />
+        }
       </div>
     )
   }
 }
 
-export default Users
+const mapStateToProps = (reducers: any) => {
+  return( reducers.userReducer)
+};
+
+export default connect(mapStateToProps, userActions)(Users);

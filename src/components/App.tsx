@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import './../Styles/style.css';
 
 import Menu from './menu';
 import Users from './users/index'

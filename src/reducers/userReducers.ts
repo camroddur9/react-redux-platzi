@@ -1,12 +1,25 @@
+import { GET_ALL, LOADING_USERS, ERROR } from './../types/usersTypes'
+
 const INITIAL_STATE = {
-    usuarios: []
+    usuarios: [],
+    loadingUsers: false,
+    error: ''
 };
 
 export default (state = INITIAL_STATE, action: any) => {
     switch (action.type){
-        case 'traer_usuarios':
-            return {...state, usuarios: action.payload}
+        case GET_ALL:
+            return {...state, 
+                usuarios: action.payload,
+                loadingUsers: false
+            };
+        
+        case LOADING_USERS:
+            return {...state, loadingUsers: true};
 
-            default: return state
+        case ERROR:
+            return {...state, error: action.payload, loadingUsers: false};
+
+        default: return state;
     }
 }
