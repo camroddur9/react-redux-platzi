@@ -7,14 +7,13 @@ import ContentComponent from './../content/Content.component'
 import SpinnerComponent from './../general/Spinner.Component'
 import FatalComponent from './../general/Fatal.Component'
 
-import icons from './../../utils/import.icons'
-
 interface Props{
   
 }
 interface Actions{
   getAll?: any
   usuarios?: any
+  users?: any
   loadingUsers?: boolean
   error?: string
 }
@@ -22,11 +21,12 @@ interface Actions{
 class Users extends React.Component <Actions, Props> {
 
   componentDidMount() {
-    this.props.getAll()
+    if(!this.props.users.length){
+      this.props.getAll()
+    }
   }
 
   render(){
-    console.log(this.props.error === "")
     return(
       <div>
         {this.props.loadingUsers ? 

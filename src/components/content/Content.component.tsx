@@ -6,15 +6,11 @@ import * as userActions from './../../actions/usersActions'
 
 import icons from './../../utils/import.icons'
 
-interface Properties {
-
-}
-
 const ContentComponent = (props: any) => {
 
   
     const handleShowRows = () => 
-      props.usuarios.map((usuario: any, key: number) => (
+      props.users.map((usuario: any, key: number) => (
         <tr key = {usuario.id}>
           <td>
             {usuario.name}
@@ -30,7 +26,7 @@ const ContentComponent = (props: any) => {
           </td>
           <td className = "show-btns-container">
             <Link to = { `/publications/${key}`}>
-              <img className = "show-btn" src = {icons['show']}></img>
+              <img alt = "show-btn" className = "show-btn" src = {icons['show']}></img>
             </Link>
           </td>
         </tr>
