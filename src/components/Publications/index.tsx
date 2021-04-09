@@ -2,24 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SpinnerComponent from './../general/Spinner.Component';
-import FatalComponent from './../general/Fatal.Component'
+import FatalComponent from './../general/Fatal.Component';
+import CommentComponent from './Comments.Component'
 
 import * as usersActions from './../../actions/usersActions';
 import * as publicationsActions from './../../actions/publicationsActions';
 
 const {getAll: usersGetAll} = usersActions;
-const {getByUser: postGetByUser} = publicationsActions;
+const {
+    getByUser: postGetByUser,
+    openClose: postOpenClose,
+    getComments: getComments,
+} = publicationsActions;
 
 interface Props {
-    match?: any
-    usuarios?: any
-    getAll?: any
-    userReducer?: any
-    publicationsReducer?: any
-    usersGetAll?: any
-    postGetAll?: any
-    postGetByUser?: any
-    name?: string
+    match?: any,
+    usuarios?: any,
+    getAll?: any,
+    userReducer?: any,
+    publicationsReducer?: any,
+
+    usersGetAll?: any,
+    postGetAll?: any,
+    postGetByUser?: any,
+    postOpenClose?: any,
+    getComments?: any,
+
+    name?: string,
 }
 
 interface State {
@@ -30,18 +39,22 @@ interface State {
 
 interface Reducers {
     userReducer?: any,
-    publicationsReducer?: any
+    publicationsReducer?: any,
+    openClose?: any
 }
 
-class Publications extends React.Component<Props, State> {
+class Publications extends React.Component<Props, State, Reducers> {
 
     async componentDidMount(){
         if (!this.props.userReducer.users.length){
             await this.props.usersGetAll()
         }
-        if(!('post_key' in this.props.userReducer.users[this.props.match.params.key])){
-            this.props.postGetByUser(this.props.match.params.key)
+        if(this.props.userReducer.users.length){
+            if(!('post_key' in this.props.userReducer.users[this.props.match.params.key])){
+                this.props.postGetByUser(this.props.match.params.key)
+            }
         }
+        
     }
 
     handleGetName = () => {
@@ -58,23 +71,32 @@ class Publications extends React.Component<Props, State> {
         if (!('post_key' in this.props.userReducer.users[this.props.match.params.key])){
             return
         }
-        else{
-            console.log(this.props.publicationsReducer.publications[this.props.userReducer.users[this.props.match.params.key].post_key])
-            return this.props.publicationsReducer.publications[this.props.userReducer.users[this.props.match.params.key].post_key].map((post: any) => (
-                <div>
-                    <h2 className = "post-title">
-                        {post.id}. {post.title}
-                    </h2>
-                    <h3>
-                        {post.body}
-                    </h3>
-                </div>
-            ))
-        }
+        return this.handleShowInfo()
         }
         
+    }
 
-        
+    handleShowInfo = () => (
+        this.props.publicationsReducer.publications[this.props.userReducer.users[this.props.match.params.key].post_key].map((post: any, keyPost: number) => (
+            <div  className = "post-title" key = {keyPost} onClick = {() => this.handleShowComments(this.props.userReducer.users[this.props.match.params.key].post_key, keyPost, post.comments)}>
+                <h2 >
+                    {post.title}
+                </h2>
+                <h3>
+                    {post.body}
+                </h3>
+                {
+                    (post.open) ? <CommentComponent comments = {post.comments}/> : <></>
+                }
+            </div>
+        ))
+    )
+
+    handleShowComments = (pub_key: any, com_key: any, comments: any) => {
+        this.props.postOpenClose(pub_key, com_key);
+        if(!comments.length){
+            this.props.getComments(pub_key, com_key);
+        }
     }
 
     render(){
@@ -107,7 +129,9 @@ const mapStateToProps = ({userReducer, publicationsReducer}: Reducers) => {
 
 const mapDispatchToProps = {
     usersGetAll,
-    postGetByUser
+    postGetByUser,
+    postOpenClose,
+    getComments
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Publications)

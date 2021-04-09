@@ -1,23 +1,46 @@
 @font-face {
   font-family: "Caviar Dreams";
-  src: url(./../UI/fonts/CaviarDreams.ttf); }
+  src: url(./../UI/fonts/CaviarDreams.ttf);
+}
 @font-face {
   font-family: "Caviar Dreams Bold";
-  src: url(./../UI/fonts/CaviarDreams_Bold.ttf); }
+  src: url(./../UI/fonts/CaviarDreams_Bold.ttf);
+}
 html {
-  font-family: "Caviar Dreams"; }
+  font-family: "Caviar Dreams";
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 body {
   margin: 0;
-  background-color: #f5f5f5; }
+  background-color: #f5f5f5;
+}
 
 h2 {
-  font-family: "Caviar Dreams" !important; }
+  font-family: "Caviar Dreams" !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #97c93e;
+}
 
 .margen {
   margin-right: 25px;
   margin-left: 25px;
-  margin-top: 50px; }
+  margin-top: 50px;
+}
 
 .tabla {
   position: absolute;
@@ -25,30 +48,37 @@ h2 {
   transform: translate(-50%, 0%);
   width: auto;
   min-width: 50%;
-  text-align: left; }
+  text-align: left;
+}
 
 .tabla td {
-  padding: 10px 0px; }
+  padding: 10px 0px;
+}
 
 #menu {
   background-color: #253a46;
   padding: 20px;
-  font-size: 20px; }
-  #menu a {
-    color: white;
-    padding-right: 50px;
-    text-decoration: none; }
-  #menu a:hover {
-    color: #97c93e; }
+  font-size: 20px;
+}
+#menu a {
+  color: white;
+  padding-right: 50px;
+  text-decoration: none;
+}
+#menu a:hover {
+  color: #97c93e;
+}
 
 .show-btn {
   position: absolute;
   width: 25px;
   height: 25px;
-  display: flex; }
+  display: flex;
+}
 
 .show-btns-container {
-  display: flex; }
+  display: flex;
+}
 
 .lds-ring {
   display: inline-block;
@@ -57,7 +87,8 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80px;
-  height: 80px; }
+  height: 80px;
+}
 
 .lds-ring div {
   box-sizing: border-box;
@@ -69,22 +100,29 @@ h2 {
   border: 8px solid #97c93e;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #97c93e transparent transparent transparent; }
+  border-color: #97c93e transparent transparent transparent;
+}
 
 .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s; }
+  animation-delay: -0.45s;
+}
 
 .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s; }
+  animation-delay: -0.3s;
+}
 
 .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s; }
+  animation-delay: -0.15s;
+}
 
 @keyframes lds-ring {
   0% {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
   100% {
-    transform: rotate(360deg); } }
+    transform: rotate(360deg);
+  }
+}
 .error-message {
   position: absolute;
   bottom: 15%;
@@ -92,7 +130,8 @@ h2 {
   left: 50%;
   transform: translate(-50%, 0%);
   font-size: 2em;
-  font-family: "Caviar Dreams Bold"; }
+  font-family: "Caviar Dreams Bold";
+}
 
 .error-message-top {
   position: absolute;
@@ -101,17 +140,30 @@ h2 {
   left: 50%;
   transform: translate(-50%, 0%);
   font-size: 2em;
-  font-family: "Caviar Dreams Bold"; }
+  font-family: "Caviar Dreams Bold";
+}
 
 .error-img {
   width: 20vw;
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%); }
+  transform: translate(-50%, -50%);
+}
 
 .post-title {
   border-top: 1px solid #253a46;
-  padding-top: 1vh !important; }
+  padding-top: 1vh !important;
+}
+
+.task-container {
+  font-size: 20px;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}
+
+.input {
+  margin-left: 15px;
+}
 
 /*# sourceMappingURL=style.css.map */

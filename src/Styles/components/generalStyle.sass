@@ -2,6 +2,11 @@
 
 html
     font-family: $font-family
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
 
 body
     margin: 0
@@ -9,6 +14,15 @@ body
 
 h2
     font-family: $font-family !important
+
+::-webkit-scrollbar 
+    width: 5px
+
+::-webkit-scrollbar-track 
+    background: #f5f5f5
+
+::-webkit-scrollbar-thumb 
+    background: $secondary-color
     
 .margen
     margin-right: 25px

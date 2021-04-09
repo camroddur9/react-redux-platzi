@@ -10,7 +10,7 @@ const Menu = (props: Props) => (
         <Link to = "/">
             Users
         </Link>
-        <Link to = "/tareas">
+        <Link to = "/tasks">
             Task
         </Link>
     </nav>

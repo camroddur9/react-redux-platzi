@@ -1,19 +1,22 @@
-import { GET_ALL_POST, LOADING_POST, ERROR_POST, GET_ALL_BY_USER  } from './../types/postTypes';
+import { LOADING_POST, ERROR_POST, UPDATE_POST, LOADING_COM, ERROR_COM  } from './../types/postTypes';
 
 const INITIAL_STATE = {
     publications: [],
     loadingPost: false,
-    error: ''
+    error: '',
+    com_loading: false,
+    com_error: ''
 };
 
 export default (state = INITIAL_STATE, action: any) => {
     switch (action.type){
 
-        case GET_ALL_BY_USER :
+        case UPDATE_POST :
             return {
                 ...state,
                 publications: action.payload,
                 loadingPost: false,
+                com_loading: false,
                 error: ''
             }
 
@@ -22,6 +25,12 @@ export default (state = INITIAL_STATE, action: any) => {
     
             case ERROR_POST:
                 return {...state, error: action.payload, loadingPost: false};
+
+            case LOADING_COM:
+                return {...state, com_loading: true, com_error: ''};
+    
+            case ERROR_COM:
+                return {...state, com_error: action.payload, com_loading: false};
 
         default: return state;
     }
